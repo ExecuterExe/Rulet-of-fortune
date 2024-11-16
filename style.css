@@ -1,0 +1,257 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+    font-family: Arial, sans-serif;
+    color: white;
+}
+
+.container {
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 30px;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.rulet {
+    display: flex;
+    gap: 10px;
+    background: #333;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+    max-width: 470px;
+    /* Ограничиваем до фиксированного значения */
+    margin: 0 auto;
+    /* Центрируем элемент */
+}
+
+
+.reel {
+    position: relative;
+    width: 150px;
+    height: 300px;
+    /* Высота для 5 видимых элементов */
+    background: #222;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.reel-container {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    transition: top 3s cubic-bezier(0.21, 0.53, 0.29, 0.99);
+}
+
+.prize-item {
+    height: 60px;
+    /* Высота каждого элемента */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #444;
+    color: white;
+    font-size: 16px;
+    border: 1px solid #555;
+    transition: background-color 0.3s;
+}
+
+.prize-item.highlight {
+    background: #ff4444;
+    font-weight: bold;
+    box-shadow: 0 0 10px rgba(255, 68, 68, 0.5);
+}
+
+.marker {
+    position: absolute;
+    width: 100%;
+    height: 60px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-top: 2px solid #ff4444;
+    border-bottom: 2px solid #ff4444;
+    pointer-events: none;
+    z-index: 1;
+}
+
+button {
+    margin-top: 30px;
+    padding: 15px 40px;
+    font-size: 18px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+button:hover {
+    background: #45a049;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+button:disabled {
+    background: #666;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.result {
+    margin-top: 20px;
+    color: white;
+    font-size: 20px;
+    min-height: 30px;
+    padding: 10px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+}
+
+.result.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@keyframes glow {
+    0% {
+        box-shadow: 0 0 5px rgba(255, 68, 68, 0.5);
+    }
+
+    50% {
+        box-shadow: 0 0 20px rgba(255, 68, 68, 0.8);
+    }
+
+    100% {
+        box-shadow: 0 0 5px rgba(255, 68, 68, 0.5);
+    }
+}
+
+.prize-item.winner {
+    animation: glow 2s infinite;
+}
+
+@media (max-width: 600px) {
+    .rulet {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .reel {
+        width: 100%;
+        height: 200px;
+    }
+
+    .prize-item {
+        height: 40px;
+        font-size: 14px;
+    }
+
+    .marker {
+        height: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .rulet {
+        flex-direction: column;
+        /* Столбец вместо строки */
+        padding: 15px;
+        width: 100%;
+        /* Растянуть на всю ширину */
+        max-width: 90%;
+        /* Ограничение ширины в процентах */
+    }
+
+    .reel {
+        width: 100%;
+        /* Растянуть барабаны на всю ширину */
+        height: 200px;
+        /* Уменьшаем высоту */
+    }
+
+    .prize-item {
+        height: 50px;
+        /* Уменьшаем высоту элемента */
+        font-size: 14px;
+        /* Уменьшаем размер текста */
+    }
+
+    .marker {
+        height: 50px;
+        /* Подгоняем высоту маркера */
+    }
+
+    button {
+        font-size: 16px;
+        /* Уменьшаем кнопку */
+        padding: 12px 30px;
+    }
+}
+
+/* Для ширины экрана до 480px (мобильные устройства) */
+@media (max-width: 480px) {
+    .rulet {
+        padding: 10px;
+        /* Сужаем отступы */
+    }
+
+    .reel {
+        height: 150px;
+        /* Еще меньше высота */
+    }
+
+    .prize-item {
+        height: 40px;
+        /* Высота элемента на мобильных */
+        font-size: 12px;
+        /* Меньший текст */
+    }
+
+    .marker {
+        height: 40px;
+        /* Подгоняем маркер */
+    }
+
+    button {
+        font-size: 14px;
+        /* Еще меньше текст кнопки */
+        padding: 10px 20px;
+    }
+
+    h1 {
+        font-size: 20px;
+        /* Уменьшаем заголовок */
+    }
+}
+
+/* Общий стиль контейнера для центрирования */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100%;
+    padding: 0 15px;
+    /* Добавляем отступы по бокам */
+    text-align: center;
+}
