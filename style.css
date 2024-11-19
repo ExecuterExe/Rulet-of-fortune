@@ -32,9 +32,7 @@ h1 {
     border-radius: 15px;
     box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
     max-width: 470px;
-    /* Ограничиваем до фиксированного значения */
     margin: 0 auto;
-    /* Центрируем элемент */
 }
 
 
@@ -42,7 +40,6 @@ h1 {
     position: relative;
     width: 150px;
     height: 300px;
-    /* Высота для 5 видимых элементов */
     background: #222;
     overflow: hidden;
     border-radius: 10px;
@@ -58,7 +55,6 @@ h1 {
 
 .prize-item {
     height: 60px;
-    /* Высота каждого элемента */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -175,83 +171,71 @@ button:disabled {
 @media (max-width: 768px) {
     .rulet {
         flex-direction: column;
-        /* Столбец вместо строки */
+
         padding: 15px;
         width: 100%;
-        /* Растянуть на всю ширину */
+
         max-width: 90%;
-        /* Ограничение ширины в процентах */
+
     }
 
     .reel {
         width: 100%;
-        /* Растянуть барабаны на всю ширину */
+
         height: 200px;
-        /* Уменьшаем высоту */
+
     }
 
     .prize-item {
         height: 50px;
-        /* Уменьшаем высоту элемента */
+
         font-size: 14px;
-        /* Уменьшаем размер текста */
+
     }
 
     .marker {
         height: 50px;
-        /* Подгоняем высоту маркера */
     }
 
     button {
         font-size: 16px;
-        /* Уменьшаем кнопку */
         padding: 12px 30px;
     }
 }
 
-/* Для ширины экрана до 480px (мобильные устройства) */
 @media (max-width: 480px) {
     .rulet {
         padding: 10px;
-        /* Сужаем отступы */
     }
 
     .reel {
         height: 150px;
-        /* Еще меньше высота */
     }
 
     .prize-item {
         height: 40px;
-        /* Высота элемента на мобильных */
         font-size: 12px;
-        /* Меньший текст */
     }
 
     .marker {
         height: 40px;
-        /* Подгоняем маркер */
     }
 
     button {
         font-size: 14px;
-        /* Еще меньше текст кнопки */
         padding: 10px 20px;
     }
 
     h1 {
         font-size: 20px;
-        /* Уменьшаем заголовок */
     }
 }
 
-/* Общий стиль контейнера для центрирования */
 .container {
     display: flex;
     flex-direction: column;
     align-items: center;
     max-width: 100%;
     padding: 0 15px;
-    /* Добавляем отступы по бокам */
     text-align: center;
 }

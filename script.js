@@ -6,8 +6,8 @@ class SlotMachine {
         this.reels = Array.from(document.querySelectorAll('.reel-container'));
         this.spinButton = document.getElementById('spin-button');
         this.resultDisplay = document.getElementById('result');
-        this.visibleItems = 5; // Количество видимых элементов
-        this.itemHeight = 60; // Высота каждого элемента
+        this.visibleItems = 5;
+        this.itemHeight = 60;
 
         this.init();
     }
@@ -25,10 +25,9 @@ class SlotMachine {
         });
     }
 
-    // Заполняем барабан призами
     populateReel(reel) {
         reel.innerHTML = '';
-        const items = this.getRandomPrizes(this.visibleItems + 2); // +2 для плавности анимации
+        const items = this.getRandomPrizes(this.visibleItems + 2);
         items.forEach(prize => {
             const div = document.createElement('div');
             div.className = 'prize-item';
@@ -37,7 +36,6 @@ class SlotMachine {
         });
     }
 
-    // Получаем случайные призы из оставшихся
     getRandomPrizes(count) {
         const prizes = [];
         for (let i = 0; i < count; i++) {
@@ -48,15 +46,12 @@ class SlotMachine {
         return prizes;
     }
 
-    // Вращение одного барабана с более быстрым движением ячеек
     async spinReel(reel, delay) {
         return new Promise(resolve => {
             setTimeout(() => {
-                // Устанавливаем стиль анимации
-                reel.style.transition = 'top 15s cubic-bezier(0.1, 0.9, 0.3, 1.0)';
+                reel.style.transition = 'top 10s cubic-bezier(0.1, 0.9, 0.3, 1.0)';
                 reel.style.top = `-${this.itemHeight * (reel.children.length - this.visibleItems)}px`;
 
-                // Добавляем новые призы в начало барабана для непрерывности
                 const newPrizes = this.getRandomPrizes(reel.children.length);
                 newPrizes.forEach(prize => {
                     const div = document.createElement('div');
@@ -65,21 +60,17 @@ class SlotMachine {
                     reel.insertBefore(div, reel.firstChild);
                 });
 
-                // Завершаем анимацию и подсвечиваем центральный элемент
                 setTimeout(() => {
                     const centerIndex = Math.floor(this.visibleItems / 2) + 2;
                     const centerItem = reel.children[centerIndex];
                     centerItem.classList.add('highlight');
                     resolve(centerItem.textContent);
-                }, 15000);
+                }, 10000);
             }, delay);
         });
     }
 
 
-
-
-    // Запуск всех барабанов
     async spin() {
         if (isSpinning || remainingPrizes.length < 3) return;
 
@@ -88,14 +79,12 @@ class SlotMachine {
         this.resultDisplay.textContent = '';
 
         try {
-            // Запускаем барабаны с разной задержкой
             const results = await Promise.all([
                 this.spinReel(this.reels[0], 0),
                 this.spinReel(this.reels[1], 200),
                 this.spinReel(this.reels[2], 400)
             ]);
 
-            // Удаляем выпавшие призы из оставшихся
             results.forEach(prize => {
                 const index = remainingPrizes.indexOf(prize);
                 if (index !== -1) {
@@ -103,7 +92,6 @@ class SlotMachine {
                 }
             });
 
-            // Показываем результат
             this.showResults(results);
 
         } catch (error) {
@@ -143,7 +131,6 @@ class SlotMachine {
     }
 }
 
-// Создаем экземпляр игры при загрузке страницы
 document.addEventListener('DOMContentLoaded', () => {
     window.slotMachine = new SlotMachine();
 });
